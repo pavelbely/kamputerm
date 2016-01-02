@@ -9,3 +9,5 @@ gulp.task('server', function() {
         }))
         .pipe(gulp.dest('lib/server'));
 });
+
+gulp.task('default', ['server']);
