@@ -24,14 +24,8 @@ export const loginConfig = {
         app.use(passport.session());
 
         passport.use("local", new LocalStrategy(UserModel.authenticate()));
-        passport.serializeUser((user, done) => {
-            console.log("lets serialize");
-            return UserModel.serializeUser()(user, done);
-        });
-        passport.deserializeUser((id, done) => {
-            console.log("lets deserialize");
-            return UserModel.deserializeUser()(id, done);
-        });
+        passport.serializeUser(UserModel.serializeUser());
+        passport.deserializeUser(UserModel.deserializeUser());
    }, configureRoutes() {
         app.post("/login", passport.authenticate('local'), (req, res) => {
             console.log("logged in");
