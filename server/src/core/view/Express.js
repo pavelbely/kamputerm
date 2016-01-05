@@ -13,6 +13,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
 
-let server = app.listen(3001, function () {
+let server = app.listen(3000, function () {
     console.log(`listening server on port ${server.address().port}`);
 });

@@ -1,10 +1,10 @@
 "use strict";
 
 import assert from "assert";
-import { WordModel } from "../../../src/word/model/WordModel.js";
+import { DefinitionModel } from "../../../src/definition/model/DefinitionModel.js";
 import * as stubs from "../stubs/stub.js";
 
-describe("Word Model", function () {
+describe("Definition Model", function () {
 
     beforeEach(function () {
         this._testData = {source : stubs.createStubWord()};
@@ -21,14 +21,14 @@ describe("Word Model", function () {
         });
 
         it("should fail with invalid sources", function (done) {
-            this._testData.source.sources.push({id: {}});
+            this._testData.source.sources.push({lang: {}});
             verify(this._testData.source, done, false);
         });
     });
 });
 
 function verify(source, done, shouldFail = true) {
-    let model = WordModel.hydrate(source);
+    let model = DefinitionModel.hydrate(source);
     model.validate(err => {
         if (!!err === shouldFail) {
             if (shouldFail) {

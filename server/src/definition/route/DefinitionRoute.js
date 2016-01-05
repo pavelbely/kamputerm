@@ -1,21 +1,21 @@
 "use strict";
 import { app } from "../../core/view/Express.js";
 import { Router } from "express";
-import { wordService } from "../servirce/WordService.js";
+import { definitionService } from "../servirce/DefinitionService.js";
 import { ensureAuthenticated } from "../../auth/middleware/LoginMiddleware.js";
 import passport from "passport";
 
-export const wordRouterConfig = {
+export const definitionRouterConfig = {
     configure() {
-        app.post("/word", ensureAuthenticated, (req, res) => {
-            wordService.addWord(req.body)
+        app.post("/definition", ensureAuthenticated, (req, res) => {
+            definitionService.addDefinition(req.body)
                 .then(model => res.json(model))
                 .catch(err => {
                     res.status(500).send(err)
                 });
         });
-        app.get("/word/:lang/:word", (req, res) => {
-            wordService.getWordBySource(req.params.lang, req.params.word)
+        app.get("/definition/:lang/:definition", (req, res) => {
+            definitionService.getDefinitionBySource(req.params.lang, req.params.word)
                 .then(model => res.json(model))
                 .catch(err => {
                     res.status(404).send(err)
