@@ -7,10 +7,15 @@ import passport from "passport";
 
 export const wordRouterConfig = {
     configure() {
-        console.log("configuring route");
         app.post("/word", ensureAuthenticated, (req, res) => {
-            console.log("word route post");
             wordService.addWord(req.body)
+                .then(model => res.json(model))
+                .catch(err => {
+                    res.status(500).send(err)
+                });
+        });
+        app.get("/word/:lang/:word", (req, res) => {
+            wordService.getWordBySource(req.params.lang, req.params.word)
                 .then(model => res.json(model))
                 .catch(err => {
                     res.status(404).send(err)

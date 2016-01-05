@@ -5,17 +5,14 @@ import { EventEmitter } from "events";
 
 class WordService extends EventEmitter {
     addWord(word) {
-        var promise = new Promise((resolve, reject) => {
-            WordModel.createWord(word, (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    this.emit("wordCreated");
-                    resolve(data);
-                }
-            });
+        return WordModel.createWord(word).then(data => {
+            this.emit("wordCreated");
+            return data;
         });
-        return promise;
+    }
+
+    getWordBySource(lang, word) {
+        return WordModel.findBySource(lang, word);
     }
 }
 
