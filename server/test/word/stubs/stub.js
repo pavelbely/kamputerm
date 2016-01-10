@@ -9,3 +9,15 @@ export function createStubWord() {
         }
     };
 }
+
+export function resolveWith(response) {
+    return (obj) => {
+        return new Promise((resolve, reject) => resolve(response));
+    }
+}
+
+export function rejectWith(err) {
+    return (obj) => {
+        return new Promise((resolve, reject) => reject(err));
+    }
+}

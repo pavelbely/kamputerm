@@ -18,34 +18,28 @@ describe("Definition Service", function () {
 
     describe("insert", function () {
 
-        it("should handle success", function (done) {
+        it("should handle success", function* () {
             let response = {};
-            this.sandbox.stub(DefinitionModel, "createDefinition", (obj) => {
-                return new Promise((resolve, reject) => resolve(response));
-            });
+            this.sandbox.stub(DefinitionModel, "createDefinition", stubs.resolveWith(response));
             let spy = this.sandbox.spy();
             definitionService.on("definitionCreated", spy);
-            let addDefinitionPromise = definitionService.addDefinition(this.__testData.source);
-            addDefinitionPromise.then(data => {
-                expect(data).to.equal(response);
-                expect(spy.called).to.equal(true);
-                done();
-            });
+            let addDefinitionResponse = yield definitionService.addDefinition(this.__testData.source);
+
+            expect(addDefinitionResponse).to.equal(response);
+            expect(spy.called).to.equal(true);
         });
 
-        it("should handle failure", function (done) {
+        it("should handle failure", function* () {
             let error = {};
-            this.sandbox.stub(DefinitionModel, "createDefinition", (obj) => {
-                return new Promise((resolve, reject) => reject(error));
-            });
+            this.sandbox.stub(DefinitionModel, "createDefinition", stubs.rejectWith(error));
             let spy = this.sandbox.spy();
             definitionService.on("definitionCreated", spy);
-            let addDefinitionPromise = definitionService.addDefinition(this.__testData.source);
-            addDefinitionPromise.catch(err => {
+            try {
+                definitionService.addDefinition(this.__testData.source);
+            } catch(err) {
                 expect(err).to.equal(error);
                 expect(spy.called).to.equal(false);
-                done();
-            });
+            }
         });
     });
 });

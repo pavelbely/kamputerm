@@ -6,17 +6,18 @@ const del = require('del');
 gulp.task('server', ['clean'], function () {
     return gulp.src('server/**')
         .pipe(babel({
-            presets: ['es2015']
+            plugins: ['transform-runtime'],
+            presets: ['es2015', 'stage-0']
         }))
         .pipe(gulp.dest('lib/server'));
 });
 
 gulp.task('client', ['clean'], function () {
     return gulp.src('client/src/**')
-            .pipe(gulp.dest('lib/server/src/views/'));
+        .pipe(gulp.dest('lib/server/src/views/'));
 });
 
-gulp.task('clean', function(cb) {
+gulp.task('clean', function (cb) {
     return del(['lib/*'], cb);
 });
 

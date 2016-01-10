@@ -37,6 +37,19 @@ DefinitionSchema.statics.updateDefinition = function (id, definitionObject) {
 
 };
 
+DefinitionSchema.statics.checkValidity = function (source) {
+    return new Promise((resolve, reject) => {
+        let model = DefinitionModel.hydrate(source);
+        model.validate(err => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+};
+
 DefinitionSchema.statics.createDefinition = function (definitionObject) {
     return this.create(definitionObject);
 };
