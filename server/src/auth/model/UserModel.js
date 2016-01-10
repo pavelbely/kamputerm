@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-import mongoose from "mongoose";
-import passportLocalMongoose from "passport-local-mongoose";
+import mongoose from 'mongoose';
+import passportLocalMongoose from 'passport-local-mongoose';
 
 const UserSchema = new mongoose.Schema({
     username: String,

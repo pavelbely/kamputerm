@@ -12,7 +12,7 @@
     <input type="button" ng-click="send()" value="Send"/>
 </div>
 <script>
-    angular.module("kamputerm", []).controller("ExampleController", ["$scope", "$http", function ($scope, $http) {
+    angular.module('kamputerm', []).controller('ExampleController', ['$scope', '$http', function ($scope, $http) {
         $scope.master = {};
 
         $scope.reset = function () {
@@ -25,7 +25,7 @@
                 $scope.message = data;
             });
             res.error(function(data, status, headers, config) {
-                alert( "failure message: " + JSON.stringify({data: data}));
+                alert('failure message: ' + JSON.stringify({data: data}));
             });
         };
 

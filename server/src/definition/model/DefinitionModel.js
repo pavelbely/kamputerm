@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 import Mongoose from 'mongoose';
 
 let DefinitionSourceSchema = Mongoose.Schema({

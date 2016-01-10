@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-import { DefinitionModel } from "../model/DefinitionModel.js";
-import { EventEmitter } from "events";
+import { DefinitionModel } from '../model/DefinitionModel.js';
+import { EventEmitter } from 'events';
 
 class WordService extends EventEmitter {
     addDefinition(word) {
         return DefinitionModel.createDefinition(word).then(data => {
-            this.emit("definitionCreated");
+            this.emit('definitionCreated');
             return data;
         });
     }
