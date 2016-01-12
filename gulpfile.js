@@ -14,7 +14,7 @@ gulp.task('server', ['clean'], function () {
 
 gulp.task('client', ['clean'], function () {
     return gulp.src('client/src/**')
-        .pipe(gulp.dest('lib/server/src/views/'));
+        .pipe(gulp.dest('lib/server/src/public/'));
 });
 
 gulp.task('clean', function (cb) {

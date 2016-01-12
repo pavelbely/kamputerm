@@ -2,4 +2,5 @@
 *.iml
 npm-debug.log
 node_modules/
+bower_components/
 lib/
