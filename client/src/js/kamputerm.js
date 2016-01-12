@@ -1,5 +1,7 @@
 'use strict';
-var angular = require('angular');
+import angular from 'angular';
+import { ApplicationController } from './controllers/application';
+import { LoginController } from './controllers/login';
 var app = angular.module('kamputerm', []);
-var application = require('./controllers/application')(app);
-var login = require('./controllers/login')(app);
+let applicationController = new ApplicationController(app);
+let loginController = new LoginController(app);

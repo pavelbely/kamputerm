@@ -9,6 +9,7 @@ const uglify = require('gulp-uglify');
 const streamify = require('gulp-streamify');
 const source = require('vinyl-source-stream');
 const transform = require('vinyl-transform');
+const babelify = require('babelify');
 
 gulp.task('server', ['clean'], function () {
     return gulp.src('server/**')
@@ -21,7 +22,6 @@ gulp.task('server', ['clean'], function () {
 
 gulp.task('client-js', ['clean'], function () {
     let bundler = browserify('./client/src/js/kamputerm.js');
-    bundler.transform('debowerify').transform('browserify-shim');
     return bundler.bundle()
         .pipe(source('bundle.js'))
         .pipe(streamify(uglify()))
