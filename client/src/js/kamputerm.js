@@ -1,7 +1,12 @@
 'use strict';
 import angular from 'angular';
+import angularAnimate from 'angular-animate';
+import angularAria from 'angular-aria';
+import angularMaterial from 'angular-material';
 import { ApplicationController } from './controllers/application';
 import { LoginController } from './controllers/login';
-var app = angular.module('kamputerm', []);
+import { SearchPageController } from './controllers/search-page';
+var app = angular.module('kamputerm', ['ngMaterial']);
 let applicationController = new ApplicationController(app);
 let loginController = new LoginController(app);
+let searchPageController = new SearchPageController(app);

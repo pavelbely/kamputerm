@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 export class LoginController {
     constructor(app) {
         app.controller('LoginController', ['$scope', '$http', function ($scope, $http) {
