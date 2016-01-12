@@ -10,6 +10,3 @@ mongoConnection.connect();
 definitionRouterConfig.configure();
 
 app.use(express.static(__dirname + '/public'));
-//app.get('/', function (req, res) {
-//    res.sendFile(`${__dirname}/views/templates/index.html`);
-//})
