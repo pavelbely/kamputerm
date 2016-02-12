@@ -21,6 +21,7 @@
     "babel-plugin-transform-runtime": "^6.4.0",
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
     "bower": "^1.7.2",
@@ -32,16 +33,18 @@
     "debowerify": "^1.3.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
+    "gulp-livereload": "^3.8.1",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.1",
     "mocha": "^2.3.4",
+    "reactify": "^1.1.1",
     "sinon": "^1.17.2",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.14.2",
+    "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
     "connect-redis": "^3.0.1",
     "cookie-parser": "^1.4.0",
@@ -49,23 +52,29 @@
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "lodash": "^3.10.1",
+    "material-ui": "^0.14.4",
     "mongoose": "^4.3.4",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^3.1.0"
+    "passport-local-mongoose": "^3.1.0",
+    "react-router": "^2.0.0",
+    "watchify": "^3.7.0"
   },
   "browserify": {
     "transform": [
-      ["babelify", { "presets": ["es2015"] }],
-      "debowerify",
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react"
+          ]
+        }
+      ],
       "browserify-shim"
     ]
   },
-  "browser": {
-    "angular": "./bower_components/angular/angular.js"
-  },
-  "browserify-shim": {
-    "angular": "angular"
-  }
+  "browser": {},
+  "browserify-shim": {}
 }

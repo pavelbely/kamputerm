@@ -1,12 +1,34 @@
 'use strict';
-import angular from 'angular';
-import angularAnimate from 'angular-animate';
-import angularAria from 'angular-aria';
-import angularMaterial from 'angular-material';
-import { ApplicationController } from './controllers/application';
-import { LoginController } from './controllers/login';
-import { SearchPageController } from './controllers/search-page';
-var app = angular.module('kamputerm', ['ngMaterial']);
-let applicationController = new ApplicationController(app);
-let loginController = new LoginController(app);
-let searchPageController = new SearchPageController(app);
+
+import ReactDOM from 'react-dom';
+import React from 'react';
+import LoginView from './login/LoginView';
+import MainView from './main/MainView';
+import FlatButton from 'material-ui/lib/flat-button';
+
+import { Router, Route, Link, browserHistory } from 'react-router'
+
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <Link to="/login"><FlatButton label="Login"/></Link>
+                <Link to="/main"><FlatButton label="Main"/></Link>
+                <br/>
+                {this.props.children}
+            </div>
+        )
+    }
+}
+
+
+
+ReactDOM.render(
+    <Router history={browserHistory}>
+        <Route path="/" component={App}>
+            <Route path="main" component={MainView}/>
+            <Route path="login" component={LoginView}/>
+        </Route>
+    </Router>,
+    document.getElementById('example')
+);

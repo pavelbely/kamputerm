@@ -9,4 +9,7 @@ loginConfig.configure();
 mongoConnection.connect();
 definitionRouterConfig.configure();
 
-app.use(express.static(__dirname + '/public'));
+app.use('/assets', express.static(__dirname + '/public'));
+app.all('*', function(req, res) {
+    res.sendfile(__dirname + '/public/index.html');
+});
