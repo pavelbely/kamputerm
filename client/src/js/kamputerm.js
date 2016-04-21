@@ -1,5 +1,3 @@
-'use strict';
-
 import ReactDOM from 'react-dom';
 import React from 'react';
 import LoginView from './login/LoginView';
@@ -20,8 +18,6 @@ class App extends React.Component {
         )
     }
 }
-
-
 
 ReactDOM.render(
     <Router history={browserHistory}>
