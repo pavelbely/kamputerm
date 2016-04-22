@@ -5,7 +5,7 @@ module.exports = {
         './client/src/js/kamputerm.js'
     ],
     output: {
-        path: path.resolve(__dirname, 'lib/server/src/public/assets'),
+        path: path.resolve(__dirname, 'lib/public/assets'),
         publicPath : 'http://localhost:8080/assets',
         filename: 'bundle.js'
     },

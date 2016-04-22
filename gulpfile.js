@@ -9,19 +9,23 @@ const transform = require('vinyl-transform');
 const webpack = require("webpack");
 const gutil = require("gulp-util");
 const webPackConfig = require('./webpack.config.js');
+const gulpFilter = require('gulp-filter');
 
 gulp.task('server', ['clean'], function () {
-    return gulp.src('server/**')
+    const jsFilter = gulpFilter('**/*.js', {restore: true});
+    return gulp.src('server/src/**')
+        .pipe(jsFilter)
         .pipe(babel({
             plugins: ['transform-runtime'],
             presets: ['es2015', 'stage-0']
         }))
-        .pipe(gulp.dest('lib/server'));
+        .pipe(jsFilter.restore)
+        .pipe(gulp.dest('lib/'));
 });
 
-gulp.task("webpack", function(callback) {
-    webpack(webPackConfig, function(err, stats) {
-        if(err) throw new gutil.PluginError("webpack", err);
+gulp.task('webpack', ['clean'], function (callback) {
+    return webpack(webPackConfig, function (err, stats) {
+        if (err) throw new gutil.PluginError("webpack", err);
         gutil.log("[webpack]", stats.toString({
             // output options
         }));
@@ -31,13 +35,13 @@ gulp.task("webpack", function(callback) {
 
 gulp.task('client-templates', ['clean'], function () {
     return gulp.src('client/src/**/*[.hbs, .html]')
-        .pipe(gulp.dest('lib/server/src/public/'));
+        .pipe(gulp.dest('lib/public/'));
 });
 
-gulp.task('client', ['clean', 'webpack', 'client-templates']);
+gulp.task('client', ['webpack', 'client-templates']);
 
 gulp.task('clean', function (cb) {
-    return del(['lib/server/src/public/*'], cb);
+    return del(['lib/*'], cb);
 });
 
 gulp.task('default', ['server', 'client']);

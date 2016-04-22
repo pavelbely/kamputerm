@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp && node lib/server/src/app.js",
-    "test": "gulp server && mocha lib/server/test/**/*.js"
+    "start": "gulp && node lib/app.js",
+    "test": "gulp server && mocha lib-test/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "app-config": "^0.1.5",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.7.5",
     "babel-polyfill": "^6.7.4",
@@ -57,6 +58,7 @@
     "babel-runtime": "^6.6.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "config": "^1.20.1",
     "connect-flash": "^0.1.1",
     "connect-redis": "^3.0.1",
     "cookie-parser": "^1.4.0",
@@ -64,6 +66,7 @@
     "express": "^4.13.3",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.12.1",
+    "gulp-filter": "^4.0.0",
     "lodash": "^3.10.1",
     "material-ui": "^0.14.4",
     "mongoose": "^4.3.4",
