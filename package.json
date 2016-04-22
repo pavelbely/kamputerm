@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp && node lib/app.js",
+    "start": "gulp && NODE_PATH=lib node lib/app.js",
     "test": "gulp server && mocha lib-test/**/*.js"
   },
   "repository": {

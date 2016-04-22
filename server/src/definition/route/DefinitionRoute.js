@@ -1,8 +1,8 @@
 'use strict';
-import { app } from '../../core/view/Express.js';
+import { app } from 'core/view/Express';
 import { Router } from 'express';
-import { definitionService } from '../servirce/DefinitionService.js';
-import { ensureAuthenticated } from '../../auth/middleware/LoginMiddleware.js';
+import { definitionService } from 'definition/servirce/DefinitionService';
+import { ensureAuthenticated } from 'auth/middleware/LoginMiddleware';
 import passport from 'passport';
 
 export const definitionRouterConfig = {

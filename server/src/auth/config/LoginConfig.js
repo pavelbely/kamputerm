@@ -2,10 +2,10 @@
 
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserModel } from '../model/UserModel.js';
+import { UserModel } from 'auth/model/UserModel';
 import expressSession from 'express-session';
 import RedisStoreFactory from 'connect-redis';
-import { app } from '../../core/view/Express.js';
+import { app } from 'core/view/Express';
 
 export const loginConfig = {
     configurePassportSettings() {

@@ -3,8 +3,8 @@
 import assert from 'assert';
 import {expect} from 'chai';
 import coMocha from 'co-mocha';
-import { DefinitionModel } from '../../../src/definition/model/DefinitionModel.js';
-import * as stubs from '../stubs/stub.js';
+import { DefinitionModel } from 'definition/model/DefinitionModel';
+import * as stubs from 'word/stubs/stub';
 
 describe('Definition Model', function () {
 

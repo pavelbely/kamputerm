@@ -1,6 +1,6 @@
 'use strict';
 
-import { DefinitionModel } from '../model/DefinitionModel.js';
+import { DefinitionModel } from 'definition/model/DefinitionModel';
 import { EventEmitter } from 'events';
 
 class WordService extends EventEmitter {
