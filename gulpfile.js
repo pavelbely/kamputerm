@@ -11,16 +11,24 @@ const gutil = require("gulp-util");
 const webPackConfig = require('./webpack.config.js');
 const gulpFilter = require('gulp-filter');
 
-gulp.task('server', ['clean'], function () {
+function copyServerSource(src, out) {
     const jsFilter = gulpFilter('**/*.js', {restore: true});
-    return gulp.src('server/src/**')
+    return gulp.src(src)
         .pipe(jsFilter)
         .pipe(babel({
             plugins: ['transform-runtime'],
             presets: ['es2015', 'stage-0']
         }))
         .pipe(jsFilter.restore)
-        .pipe(gulp.dest('lib/'));
+        .pipe(gulp.dest(out));
+}
+
+gulp.task('server', ['clean'], function () {
+    return copyServerSource('server/src/**', 'lib/');
+});
+
+gulp.task('server-test', ['clean'], function () {
+    return copyServerSource('server/test/**', 'lib-test/');
 });
 
 gulp.task('webpack', ['clean'], function (callback) {
@@ -45,3 +53,4 @@ gulp.task('clean', function (cb) {
 });
 
 gulp.task('default', ['server', 'client']);
+gulp.task('test', ['server', 'server-test']);

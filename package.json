@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp && NODE_PATH=lib node lib/app.js",
-    "test": "gulp server && mocha lib-test/**/*.js"
+    "test": "gulp test && NODE_PATH=lib:lib-test && mocha lib-test/**/*.js"
   },
   "repository": {
     "type": "git",
