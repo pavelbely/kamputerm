@@ -14,6 +14,6 @@ definitionRouterConfig.configure();
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'));
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
     res.render(`${__dirname}/public/index.hbs`, { bundleHost : config.client.bundleHost});
 });
