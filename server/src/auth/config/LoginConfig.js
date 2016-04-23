@@ -5,10 +5,9 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { UserModel } from 'auth/model/UserModel';
 import expressSession from 'express-session';
 import RedisStoreFactory from 'connect-redis';
-import { app } from 'core/view/Express';
 
 export const loginConfig = {
-    configurePassportSettings() {
+    configurePassportSettings(app) {
         console.log('configured passport');
 
         var RedisStore = RedisStoreFactory(expressSession);
@@ -26,7 +25,7 @@ export const loginConfig = {
         passport.use('local', new LocalStrategy(UserModel.authenticate()));
         passport.serializeUser(UserModel.serializeUser());
         passport.deserializeUser(UserModel.deserializeUser());
-   }, configureRoutes() {
+   }, configureRoutes(app) {
         app.post('/login', passport.authenticate('local'), (req, res) => {
             console.log('logged in');
             res.status(200).send('logged in');
@@ -41,8 +40,8 @@ export const loginConfig = {
                 });
             });
         });
-    }, configure() {
-        this.configurePassportSettings();
-        this.configureRoutes();
+    }, configure(app, config) {
+        this.configurePassportSettings(app);
+        this.configureRoutes(app);
     }
 };

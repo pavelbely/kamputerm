@@ -1,12 +1,11 @@
 'use strict';
-import { app } from 'core/view/Express';
 import { Router } from 'express';
 import { definitionService } from 'definition/servirce/DefinitionService';
 import { ensureAuthenticated } from 'auth/middleware/LoginMiddleware';
 import passport from 'passport';
 
 export const definitionRouterConfig = {
-    configure() {
+    configure(app) {
         app.post('/definition', ensureAuthenticated, (req, res) => {
             definitionService.addDefinition(req.body)
                 .then(model => res.json(model))
