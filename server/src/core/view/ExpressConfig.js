@@ -21,7 +21,7 @@ export const expressConfig = {
             res.render(`${__dirname}/../../public/index.hbs`, {bundleHost: config.client.bundleHost});
         });
 
-        let server = app.listen('3000', '0.0.0.0', () => {
+        let server = app.listen(process.env.PORT || '3000', '0.0.0.0', () => {
             console.log(`listening server on port ${server.address().port}`);
         });
     }
