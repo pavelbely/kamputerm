@@ -5,6 +5,6 @@ export const mongoConfig = {
     configure(config) {
         Mongoose.set('debug', true);
         Mongoose.Promise = global.Promise;
-        Mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/kamputerm');
+        Mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kamputerm');
     }
 };
