@@ -2,9 +2,9 @@
 import sinon from 'sinon';
 import assert from 'assert';
 import { expect } from 'chai';
-import * as stubs from 'word/stubs/stub';
-import { definitionService } from 'definition/servirce/DefinitionService';
-import { DefinitionModel } from 'definition/model/DefinitionModel';
+import * as stubs from '../stubs/stub';
+import { definitionService } from '../../../lib/definition/service/DefinitionService.js';
+import { DefinitionModel } from '../../../lib/definition/model/DefinitionModel.js';
 
 describe('Definition Service', function () {
     beforeEach(function () {

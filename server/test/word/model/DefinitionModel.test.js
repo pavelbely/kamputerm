@@ -3,8 +3,8 @@
 import assert from 'assert';
 import {expect} from 'chai';
 import coMocha from 'co-mocha';
-import { DefinitionModel } from 'definition/model/DefinitionModel';
-import * as stubs from 'word/stubs/stub';
+import { DefinitionModel } from '../../../lib/definition/model/DefinitionModel.js';
+import * as stubs from '../stubs/stub';
 
 describe('Definition Model', function () {
 
@@ -30,11 +30,16 @@ describe('Definition Model', function () {
 
         it('should fail with invalid sources', function* () {
             try {
-                this._testData.source.sources.push({lang: {}});
+                this._testData.source.langs = {
+                  en: {
+                    spelling: ['scope']
+                    //no definition provided
+                    }
+                };
                 yield DefinitionModel.checkValidity(this._testData.source);
                 assert.fail('should fail');
             } catch (err) {
-                expect(err.errors).to.have.property('sources.1.lang');
+                expect(err.errors).to.have.property('langs.en.definition');
                 expect(err.name).to.equal('ValidationError');
             }
         });
