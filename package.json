@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp && NODE_PATH=lib node lib/app.js",
-    "test": "gulp test && NODE_PATH=lib:lib-test && mocha lib-test/**/*.js"
+    "start": "gulp && export NODE_PATH=lib && node lib/app.js",
+    "test": "gulp test && export NODE_PATH=lib:lib-test && mocha lib-test/**/*.js"
   },
   "repository": {
     "type": "git",
