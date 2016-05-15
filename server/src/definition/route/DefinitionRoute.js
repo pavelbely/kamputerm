@@ -1,6 +1,6 @@
 'use strict';
 import { Router } from 'express';
-import { definitionService } from 'definition/servirce/DefinitionService';
+import { definitionService } from 'definition/service/DefinitionService';
 import { ensureAuthenticated } from 'auth/middleware/LoginMiddleware';
 import passport from 'passport';
 
@@ -13,7 +13,7 @@ export const definitionRouterConfig = {
                     res.status(500).send(err)
                 });
         });
-        app.get('/definition/:lang/:definition', (req, res) => {
+        app.get('/definition/:lang/:word', (req, res) => {
             definitionService.getDefinitionBySource(req.params.lang, req.params.word)
                 .then(model => res.json(model))
                 .catch(err => {

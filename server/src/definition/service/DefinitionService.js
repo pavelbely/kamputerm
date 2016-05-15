@@ -1,6 +1,6 @@
 'use strict';
 
-import { DefinitionModel } from '../../definition/model/DefinitionModel';
+import { DefinitionModel } from 'definition/model/DefinitionModel';
 import { EventEmitter } from 'events';
 
 class WordService extends EventEmitter {
@@ -11,8 +11,8 @@ class WordService extends EventEmitter {
         });
     }
 
-    getDefinitionBySource(lang, word) {
-        return DefinitionModel.findBySource(lang, word);
+    getDefinitionBySpelling(lang, word) {
+        return DefinitionModel.findBySpelling(lang, word);
     }
 }
 

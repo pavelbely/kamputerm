@@ -2,9 +2,9 @@
 import Mongoose from 'mongoose';
 
 let LanguageDefinitionSchema = Mongoose.Schema({
-    spelling: [{type: String, required: true, index: true}],
+    spelling: {type: [String], required: true, index: true},
     definition: {type: String, required: true}
-});
+},{ _id : false });
 
 let DefinitionSchema = Mongoose.Schema({
     langs: {
@@ -14,22 +14,18 @@ let DefinitionSchema = Mongoose.Schema({
         by_lacinka: {type : LanguageDefinitionSchema},
     },
     meta: {
-        tags: [{type: String, index: true}]
+        tags: {type: [String], index: true}
     }
 });
 
 DefinitionSchema.statics.findBySpelling = function (lang, spelling) {
     return this.find({
-        langs: {
+        "langs": {
             lang: {
-                spelling: new RegExp(spelling, 'i')
+                "spelling": new RegExp(spelling)
             }
         }
     }).exec();
-};
-
-DefinitionSchema.statics.updateDefinition = function (id, definitionObject) {
-
 };
 
 DefinitionSchema.statics.checkValidity = function (source) {
