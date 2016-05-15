@@ -9,5 +9,5 @@ process.env['NODE_CONFIG_DIR'] = 'lib/config';
 let config = require('app-config');
 loginConfig.configure(app, config);
 mongoConfig.configure(config);
-definitionRouterConfig.configure(app);
 expressConfig.configure(app, config);
+definitionRouterConfig.configure(app);
