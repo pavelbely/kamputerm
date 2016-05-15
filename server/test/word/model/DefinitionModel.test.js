@@ -30,11 +30,16 @@ describe('Definition Model', function () {
 
         it('should fail with invalid sources', function* () {
             try {
-                this._testData.source.sources.push({lang: {}});
+                this._testData.source.langs = {
+                  en: {
+                    spelling: ['scope']
+                    //no definition provided
+                    }
+                };
                 yield DefinitionModel.checkValidity(this._testData.source);
                 assert.fail('should fail');
             } catch (err) {
-                expect(err.errors).to.have.property('sources.1.lang');
+                expect(err.errors).to.have.property('langs.en.definition');
                 expect(err.name).to.equal('ValidationError');
             }
         });

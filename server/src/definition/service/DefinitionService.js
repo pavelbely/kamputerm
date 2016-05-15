@@ -11,8 +11,8 @@ class WordService extends EventEmitter {
         });
     }
 
-    getDefinitionBySource(lang, word) {
-        return DefinitionModel.findBySource(lang, word);
+    getDefinitionBySpelling(lang, word) {
+        return DefinitionModel.findBySpelling(lang, word);
     }
 }
 

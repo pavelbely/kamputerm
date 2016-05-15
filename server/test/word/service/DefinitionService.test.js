@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import assert from 'assert';
 import { expect } from 'chai';
 import * as stubs from 'word/stubs/stub';
-import { definitionService } from 'definition/servirce/DefinitionService';
+import { definitionService } from 'definition/service/DefinitionService';
 import { DefinitionModel } from 'definition/model/DefinitionModel';
 
 describe('Definition Service', function () {
