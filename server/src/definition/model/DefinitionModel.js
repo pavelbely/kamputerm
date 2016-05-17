@@ -21,8 +21,8 @@ let DefinitionSchema = Mongoose.Schema({
 DefinitionSchema.statics.findBySpelling = function (lang, spelling) {
     return this.find({
         "langs": {
-            lang: {
-                "spelling": new RegExp(spelling)
+            [lang]: {
+                "spelling": new RegExp('^' + spelling)
             }
         }
     }).exec();
