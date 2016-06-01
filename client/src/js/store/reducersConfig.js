@@ -1,4 +1,4 @@
-import word from '../word/reducers/wordReducer';
+import word from '../word/reducers/definitionReducer';
 
 export default {
     word

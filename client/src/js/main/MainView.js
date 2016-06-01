@@ -9,12 +9,6 @@ class MainView extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
-        this.setState({
-            dataSource: [],
-        });
-    }
-
     handleUpdateInput(value) {
         this.props.changeWord(value);
     };
@@ -24,12 +18,11 @@ class MainView extends React.Component {
         return (
             <div style={{backgroundColor : '#fff'}}>
                 <AutoComplete
-                    hintText="Увядзіце слова"
+                    hintText="Калі ласка, Увядзіце слова"
                     style={{marginLeft : '100px'}}
-                    dataSource={this.state.dataSource}
+                    dataSource={this.props.hints}
                     onUpdateInput={(value) => this.handleUpdateInput(value)}
                 />
-                {this.props.hints.map(e => <h1>{e}</h1>)}
             </div>
         );
     }

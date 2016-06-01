@@ -2,7 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {createAction} from 'redux-actions';
 import {CHANGE_WORD} from './ActionType';
 import promiseMiddleware from 'redux-promise';
-import wordService from '../word/service/wordService';
+import wordService from '../word/service/definitionService';
 import reducers from './reducersConfig';
 
 export const store = createStore(
