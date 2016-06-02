@@ -22,7 +22,7 @@ DefinitionSchema.statics.findBySpelling = function (lang, spelling) {
     return this.find({
         "langs": {
             [lang]: {
-                "spelling": new RegExp('^' + spelling)
+                "spelling": new RegExp(`^${spelling}`)
             }
         }
     }).exec();

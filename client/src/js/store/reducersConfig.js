@@ -1,5 +1,5 @@
-import word from '../word/reducers/definitionReducer';
+import definition from '../definition/reducers/definitionReducer';
 
 export default {
-    word
+    definition
 };

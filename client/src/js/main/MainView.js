@@ -1,4 +1,4 @@
-import { AutoComplete } from 'material-ui';
+import { AutoComplete, RaisedButton } from 'material-ui';
 import { Route, Link} from 'react-router'
 import React from 'react';
 import {connect} from 'react-redux';
@@ -17,6 +17,8 @@ class MainView extends React.Component {
     render() {
         return (
             <div style={{backgroundColor : '#fff'}}>
+                <RaisedButton label="login" linkButton={true} href="login"/>
+                <br/>
                 <AutoComplete
                     hintText="Калі ласка, Увядзіце слова"
                     style={{marginLeft : '100px'}}
@@ -31,7 +33,7 @@ class MainView extends React.Component {
 export default connect(
     (state, ownProps) => ({
         ...ownProps,
-        hints: state.word.hints
+        hints: state.definition.hints
     }),
     dispatch => ({
         changeWord : value => {
