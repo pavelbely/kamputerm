@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router'
 import {RaisedButton, TextField} from 'material-ui';
 import {setIn} from '../utils/immutable';
+import auth from '../auth/auth';
 const styles = {
     margin: {marginRight: 12},
     inputsContainer: {height: 120}
@@ -65,7 +66,51 @@ export default class LoginView extends React.Component {
 
     enter() {
         let [valid, nextState] = this.verifyProperties(['nameOrEmail', 'password']);
-        this.setState(nextState);
+        this.setState(nextState, this.handleSubmit);
+    }
+
+    handleSubmit() {
+
+
+      const email = this.state.nameOrEmail;
+      const pass = this.state.password;
+
+      const { location } = this.props
+
+      auth.login(email, pass)
+        .then(response => {
+            if (location.state && location.state.nextPathname) {
+              this.props.router.replace(location.state.nextPathname)
+            }
+          },
+          reject => {
+            this.props.router.replace('/')
+          });
+    }
+
+    submitLogin() {
+      let loginData = {
+        username : this.state.nameOrEmail,
+        password : this.state.password
+      };
+
+      // Send the form data.
+      var xmlhttp = new XMLHttpRequest();
+      var _this = this;
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4) {
+          var response = JSON.parse(xmlhttp.responseText);
+          if (xmlhttp.status === 200 && response.status === 'OK') {
+            _this.setState({ type: 'success', message: 'We have received your message and will get in touch shortly. Thanks!' });
+          }
+          else {
+            _this.setState({ type: 'danger', message: 'Sorry, there has been an error. Please try again later or send us an email at info@example.com.' });
+          }
+        }
+      };
+      xmlhttp.open('POST', 'auth/login', true);
+      xmlhttp.setRequestHeader('Content-type', 'application/json');
+      xmlhttp.send(JSON.stringify(loginData));
     }
 
     createLoginView() {
