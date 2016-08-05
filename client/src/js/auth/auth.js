@@ -4,41 +4,17 @@ module.exports = {
       "username" : username,
       "password" : password
     };
-    return sendHttpRequest('auth/login', 'POST', JSON.stringify(loginData));
+    return fetch('auth/login', {
+        method : 'POST',
+        body : JSON.stringify(loginData),
+        headers: new Headers({
+      		'Content-Type': 'application/json'
+      	}),
+        credentials: 'include'
+      });
   },
 
   ensureAuthenticated() {
-    return sendHttpRequest('auth/isLoggedIn', 'GET');
+    return fetch('auth/isLoggedIn', { credentials: 'include' });
   }
-}
-
-function sendHttpRequest(url, type, data) {
-
-  return new Promise(function(resolve, reject) {
-
-    var xhr = new XMLHttpRequest();
-    xhr.open(type, url, true);
-
-    xhr.onload = function() {
-      if (this.status == 200) {
-        resolve(this.response);
-      } else {
-        var error = new Error(this.statusText);
-        error.code = this.status;
-        reject(error);
-      }
-    };
-
-    xhr.onerror = function() {
-      reject(new Error("Network Error"));
-    };
-
-    if ((type == 'POST' || type == 'PUT') && data !== null) {
-      xhr.setRequestHeader('Content-type', 'application/json');
-      xhr.send(data);
-    } else {
-      xhr.send();
-    }
-  });
-
 }

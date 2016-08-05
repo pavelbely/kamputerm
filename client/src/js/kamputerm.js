@@ -21,12 +21,13 @@ class App extends React.Component {
 
 function requireAuth(nextState, replace, next) {
   auth.ensureAuthenticated()
-    .then(() => {  next() },
-      () => {
-        replace({
-          pathname: '/login',
-          state: { nextPathname: nextState.location.pathname }
-        });
+    .then(function(res) {
+        if (res.status == 401) {
+          replace({
+            pathname: '/login',
+            state: { nextPathname: nextState.location.pathname }
+          });
+        }
         next();
       });
 }
