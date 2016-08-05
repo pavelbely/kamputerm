@@ -1,3 +1,3 @@
 module.exports = {
-    'bundleHost' : 'http://localhost:8080/'
+  'bundleHost': 'http://localhost:8080/',
 };

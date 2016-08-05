@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp && export NODE_PATH=lib && node lib/app.js",
-    "test": "gulp test && export NODE_PATH=lib:lib-test && mocha lib-test/**/*.js"
+    "test": "gulp test && export NODE_PATH=lib:lib-test && mocha lib-test/**/*.js",
+    "lint": "export NODE_PATH=lib:lib-test && eslint ."
   },
   "repository": {
     "type": "git",
@@ -44,7 +45,14 @@
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "babel-eslint": "^6.1.2",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^1.5.5",
+    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-react-native": "^1.2.0"
   },
   "dependencies": {
     "app-config": "^0.1.5",
