@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router'
 import {RaisedButton, TextField} from 'material-ui';
 import {setIn} from '../utils/immutable';
+import auth from '../auth/auth';
+import { withRouter } from 'react-router'
+
 const styles = {
     margin: {marginRight: 12},
     inputsContainer: {height: 120}
@@ -24,7 +27,11 @@ const checkProperty = (state, property, errorProvider) => {
     return [true, state];
 };
 
-export default class LoginView extends React.Component {
+// export default class LoginView extends React.Component {
+class LoginView extends React.Component {
+    constructor(props) {
+      super(props)
+    }
 
     createTextField(property, label, props = {}) {
         return <TextField
@@ -65,7 +72,27 @@ export default class LoginView extends React.Component {
 
     enter() {
         let [valid, nextState] = this.verifyProperties(['nameOrEmail', 'password']);
-        this.setState(nextState);
+        this.setState(nextState, this.handleSubmit);
+    }
+
+    handleSubmit() {
+
+
+      const email = this.state.nameOrEmail;
+      const pass = this.state.password;
+
+      const { location } = this.props
+
+      auth.login(email, pass)
+        .then(response => {
+            debugger;
+            if (location.state && location.state.nextPathname) {
+              this.props.router.replace(location.state.nextPathname)
+            }
+          },
+          reject => {
+            this.props.router.replace('/')
+          });
     }
 
     createLoginView() {
@@ -110,3 +137,5 @@ export default class LoginView extends React.Component {
         </div>;
     }
 }
+
+export default withRouter(LoginView)

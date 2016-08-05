@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { UserModel } from 'auth/model/UserModel';
 import passport from 'passport';
+import { ensureAuthenticated } from 'auth/middleware/AuthMiddleware';
 
 const router = Router();
 
@@ -19,5 +20,7 @@ router.post('/register', (req, res) => {
         });
     });
 });
+
+router.get('/isLoggedIn', ensureAuthenticated);
 
 export default router;
