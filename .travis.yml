@@ -1,8 +1,14 @@
 language: node_js
 node_js:
   - "5.10.0"
+cache:
+  directories:
+    - node_modules
+    - /usr/local/bin/flow
 before_script:
   - npm install
+  - brew install flow
 script:
   - npm test
   - npm run lint
+  - flow
