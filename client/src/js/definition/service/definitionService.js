@@ -3,7 +3,7 @@ export default {
     return [
       part,
       part + part,
-      part + part + part + '1',
+      `${part + part + part}1`,
     ];
   },
 };

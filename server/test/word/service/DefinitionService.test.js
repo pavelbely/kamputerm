@@ -1,40 +1,38 @@
-'use strict';
 import sinon from 'sinon';
-import assert from 'assert';
 import { expect } from 'chai';
 import * as stubs from 'word/stubs/stub';
 import { definitionService } from 'definition/service/DefinitionService';
 import { DefinitionModel } from 'definition/model/DefinitionModel';
 
-describe('Definition Service', function () {
+describe('Definition Service', () => {
   beforeEach(function () {
     this.sandbox = sinon.sandbox.create();
-    this.__testData = { source: stubs.createStubWord() };
+    this._testData = { source: stubs.createStubWord() };
   });
 
   afterEach(function () {
     this.sandbox.restore();
   });
 
-  describe('insert', function () {
+  describe('insert', () => {
     it('should handle success', function* () {
-      let response = {};
+      const response = {};
       this.sandbox.stub(DefinitionModel, 'createDefinition', stubs.resolveWith(response));
-      let spy = this.sandbox.spy();
+      const spy = this.sandbox.spy();
       definitionService.on('definitionCreated', spy);
-      let addDefinitionResponse = yield definitionService.addDefinition(this.__testData.source);
+      const addDefinitionResponse = yield definitionService.addDefinition(this._testData.source);
 
       expect(addDefinitionResponse).to.equal(response);
       expect(spy.called).to.equal(true);
     });
 
     it('should handle failure', function* () {
-      let error = {};
+      const error = {};
       this.sandbox.stub(DefinitionModel, 'createDefinition', stubs.rejectWith(error));
-      let spy = this.sandbox.spy();
+      const spy = this.sandbox.spy();
       definitionService.on('definitionCreated', spy);
       try {
-        definitionService.addDefinition(this.__testData.source);
+        definitionService.addDefinition(this._testData.source);
       } catch (err) {
         expect(err).to.equal(error);
         expect(spy.called).to.equal(false);

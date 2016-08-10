@@ -1,12 +1,13 @@
-'use strict';
 import Mongoose from 'mongoose';
 
-let LanguageDefinitionSchema = Mongoose.Schema({
+let DefinitionModelInternal = undefined;
+
+const LanguageDefinitionSchema = new Mongoose.Schema({
   spelling: { type: [String], required: true, index: true },
   definition: { type: String, required: true },
 }, { _id: false });
 
-let DefinitionSchema = Mongoose.Schema({
+const DefinitionSchema = new Mongoose.Schema({
   langs: {
     en: { type: LanguageDefinitionSchema },
     by_narkam: { type: LanguageDefinitionSchema },
@@ -18,19 +19,18 @@ let DefinitionSchema = Mongoose.Schema({
   },
 });
 
-DefinitionSchema.statics.findBySpelling = function (lang, spelling) {
-  return this.find({
-    'langs': {
+DefinitionSchema.statics.findBySpelling = (lang, spelling) =>
+  this.find({
+    langs: {
       [lang]: {
-        'spelling': new RegExp(`^${spelling}`),
+        spelling: new RegExp(`^${spelling}`),
       },
     },
   }).exec();
-};
 
-DefinitionSchema.statics.checkValidity = function (source) {
-  return new Promise((resolve, reject) => {
-    let model = DefinitionModel.hydrate(source);
+DefinitionSchema.statics.checkValidity = (source) =>
+  new Promise((resolve, reject) => {
+    const model = DefinitionModelInternal.hydrate(source);
     model.validate(err => {
       if (err) {
         reject(err);
@@ -39,10 +39,10 @@ DefinitionSchema.statics.checkValidity = function (source) {
       }
     });
   });
-};
 
-DefinitionSchema.statics.createDefinition = function (definitionObject) {
-  return this.create(definitionObject);
-};
+DefinitionSchema.statics.createDefinition = (definitionObject) =>
+  this.create(definitionObject);
 
-export const DefinitionModel = Mongoose.model('Definition', DefinitionSchema);
+DefinitionModelInternal = Mongoose.model('Definition', DefinitionSchema);
+
+export const DefinitionModel = DefinitionModelInternal;

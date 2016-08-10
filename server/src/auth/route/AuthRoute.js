@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { UserModel } from 'auth/model/UserModel';
 import passport from 'passport';
+import { UserModel } from 'auth/model/UserModel';
 import { ensureAuthenticated } from 'auth/middleware/AuthMiddleware';
 
-const router = Router();
+const router = new Router();
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
   console.log('logged in');
@@ -11,14 +11,24 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  UserModel.register(new UserModel({ username: req.body.username }), req.body.password, (err, account) => {
-    if (err) {
-      return res.status(401).send(err);
+  const userModel = new UserModel({ username: req.body.username });
+  UserModel.register(
+    userModel,
+    req.body.password,
+    (err, account) => {
+      if (err) {
+        res.status(401).send(err);
+      } else {
+        passport.authenticate('local')(
+          req,
+          res,
+          () => {
+            res.redirect('/');
+          }
+        );
+      }
     }
-    passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
-    });
-  });
+  );
 });
 
 router.get('/isLoggedIn', ensureAuthenticated);

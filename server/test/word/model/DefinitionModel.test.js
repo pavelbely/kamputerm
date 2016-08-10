@@ -1,18 +1,15 @@
-'use strict';
-
 import assert from 'assert';
 import { expect } from 'chai';
-import coMocha from 'co-mocha';
 import sinon from 'sinon';
 import { DefinitionModel } from 'definition/model/DefinitionModel';
 import * as stubs from 'word/stubs/stub';
 
-describe('Definition Model', function () {
+describe('Definition Model', () => {
   beforeEach(function () {
     this._testData = stubs.createStubWord();
   });
 
-  describe('validation', function () {
+  describe('validation', () => {
     it('should validate correct object', function* () {
       yield DefinitionModel.checkValidity(this._testData);
     });
@@ -45,20 +42,19 @@ describe('Definition Model', function () {
     });
   });
 
-  describe('find', function () {
+  describe('find', () => {
     it('should retrieve existing document', function* () {
-      var DefinitionMock = sinon.mock(DefinitionModel);
-      var self = this;
-      var mockFindResult = {
+      const self = this;
+      const mockFindResult = {
         exec() {
           return self._testData;
         },
       };
       sinon.stub(DefinitionModel, 'find')
-                .withArgs({ 'langs': { 'en': { 'spelling': new RegExp('^scope') } } })
+                .withArgs({ langs: { en: { spelling: new RegExp('^scope') } } })
                 .returns(mockFindResult);
 
-      var actual = DefinitionModel.findBySpelling('en', 'scope');
+      const actual = DefinitionModel.findBySpelling('en', 'scope');
 
       expect(actual.langs.by_narkam.spelling).to.equal('абсяг');
     });

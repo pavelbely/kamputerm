@@ -1,6 +1,6 @@
 module.exports = {
   login(username, password) {
-    let loginData = {
+    const loginData = {
       username,
       password,
     };
@@ -8,8 +8,8 @@ module.exports = {
       method: 'POST',
       body: JSON.stringify(loginData),
       headers: new Headers({
-      		                      'Content-Type': 'application/json',
-      	  }),
+        'Content-Type': 'application/json',
+      }),
       credentials: 'include',
     });
   },

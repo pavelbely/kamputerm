@@ -1,4 +1,3 @@
-'use strict';
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -20,7 +19,7 @@ class ExpressConfig {
   configureView(app, config) {
     app.engine('.hbs', exphbs({ extname: '.hbs' }));
     app.set('view engine', '.hbs');
-    app.use(express.static(__dirname + '/../../public'));
+    app.use(express.static(`${__dirname}/../../public`));
     app.get('*', (req, res) => {
       res.render(`${__dirname}/../../public/index.hbs`, { bundleHost: config.client.bundleHost });
     });
@@ -37,7 +36,7 @@ class ExpressConfig {
     this.configureRoutes(app, config);
     this.configureView(app, config);
 
-    let server = app.listen(process.env.PORT || '3000', '0.0.0.0', () => {
+    const server = app.listen(process.env.PORT || '3000', '0.0.0.0', () => {
       console.log(`listening server on port ${server.address().port}`);
     });
   }

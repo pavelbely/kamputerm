@@ -1,5 +1,3 @@
-'use strict';
-
 import { DefinitionModel } from 'definition/model/DefinitionModel';
 import { EventEmitter } from 'events';
 

@@ -1,11 +1,10 @@
-'use strict';
-
 export function createStubWord() {
   return {
     langs: {
       en: {
         spelling: 'scope',
-        definition: 'the portion of source code in which a binding of a name with an entity applies',
+        definition: 'the portion of source code in which a binding ' +
+        'of a name with an entity applies',
       },
       by_narkam: {
         spelling: 'абсяг',
@@ -18,14 +17,12 @@ export function createStubWord() {
   };
 }
 
-export function resolveWith(response) {
-  return (obj) => {
-    return new Promise((resolve, reject) => resolve(response));
-  };
-}
+export const resolveWith =
+  response =>
+    obj =>
+      new Promise((resolve, reject) => resolve(response));
 
-export function rejectWith(err) {
-  return (obj) => {
-    return new Promise((resolve, reject) => reject(err));
-  };
-}
+export const rejectWith =
+  err =>
+    obj =>
+      new Promise((resolve, reject) => reject(err));

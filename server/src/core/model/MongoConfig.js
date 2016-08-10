@@ -1,4 +1,3 @@
-'use strict';
 import Mongoose from 'mongoose';
 
 export const mongoConfig = {
