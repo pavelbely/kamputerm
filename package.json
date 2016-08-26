@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp && export NODE_PATH=lib && node lib/app.js",
-    "test": "gulp test && export NODE_PATH=lib:lib-test && mocha lib-test/**/*.js"
+    "test": "gulp test && export NODE_PATH=lib:lib-test && mocha lib-test/**/*.js",
+    "lint": "export NODE_PATH=server/src:client/src && eslint ."
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/it-mova/kamputerm#readme",
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.4.0",
     "babel-polyfill": "^6.3.14",
@@ -25,13 +27,17 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
-    "bower": "^1.7.2",
-    "browserify": "^13.0.0",
     "browserify-shim": "^3.8.12",
     "chai": "^3.4.1",
     "co": "^4.6.0",
     "co-mocha": "^1.1.2",
-    "debowerify": "^1.3.1",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^1.5.5",
+    "eslint-plugin-mocha": "^4.3.0",
+    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-react-native": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
     "gulp-livereload": "^3.8.1",
@@ -79,7 +85,7 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.4.5",
-    "react-router": "^2.0.0",
+    "react-router": "^2.4.0",
     "react-tap-event-plugin": "^0.2.0",
     "redux": "^3.5.2",
     "redux-actions": "^0.9.1",
